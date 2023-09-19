@@ -5,10 +5,9 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-import dotenv from 'dotenv';
 const container = document.getElementById('root');
 const root = createRoot(container);
-dotenv.config();
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>

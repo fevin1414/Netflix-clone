@@ -1,8 +1,6 @@
-import dotenv from 'dotenv';
-dotenv.config();
 
-const API_key=process.env.REACT_APP_API_KEY;
 
+const API_key='2872e905940016a367d54c0c998de911';
 const request={
 fetchTrending:`/trending/all/week?api_key=${API_key}&language=en-US`,
 fetchNetflixOriginals:`/discover/tv?api_key=${API_key}&with_networks=213`,
