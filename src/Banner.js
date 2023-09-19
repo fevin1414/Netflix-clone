@@ -3,7 +3,7 @@ import "./Banner.css";
 import axios from "./axios";
 import request from "./request";
 import { YouTubeAPIKey } from "./config";
-import YouTube from 'react-youtube';
+import YouTube from "react-youtube";
 
 function Banner() {
   const [movie, setMovie] = useState(null);
@@ -15,7 +15,9 @@ function Banner() {
     async function fetchData() {
       try {
         const response = await axios.get(request.fetchNetflixOriginals);
-        const randomIndex = Math.floor(Math.random() * response.data.results.length - 1);
+        const randomIndex = Math.floor(
+          Math.random() * response.data.results.length - 1
+        );
         const randomMovie = response.data.results[randomIndex];
         setMovie(randomMovie);
 
@@ -36,15 +38,18 @@ function Banner() {
   async function fetchYouTubeVideoId(movieName) {
     try {
       const API_KEY = YouTubeAPIKey;
-      const response = await axios.get(`https://www.googleapis.com/youtube/v3/search`, {
-        params: {
-          key: API_KEY,
-          q: `${movieName} trailer`,
-          type: 'video',
-          part: 'id',
-          maxResults: 1,
-        },
-      });
+      const response = await axios.get(
+        `https://www.googleapis.com/youtube/v3/search`,
+        {
+          params: {
+            key: API_KEY,
+            q: `${movieName} trailer`,
+            type: "video",
+            part: "id",
+            maxResults: 1,
+          },
+        }
+      );
 
       if (response.data.items.length > 0) {
         return response.data.items[0].id.videoId;
@@ -58,48 +63,55 @@ function Banner() {
   }
 
   const opts = {
-    width: '100%', // You can adjust this width as needed
-    height: '100%', // Maintain the same aspect ratio as the container (16:9)
+    width: "100%", // You can adjust this width as needed
+    height: "100%", // Maintain the same aspect ratio as the container (16:9)
     playerVars: {
-      autoplay: 1,
+      autoplay: isHovered ? 1 : 0, // Set autoplay based on hover state
       controls: 0,
     },
   };
 
   const onReady = (event) => {
-    setIsPlayerReady(true); // Set the player readiness to true when ready
-  };
+    setIsPlayerReady(true);
+  }
 
   function truncate(string, n) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
 
   return (
-    <div className="banner" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-    {isHovered && videoId ? (
-      <YouTube videoId={videoId} opts={opts} onReady={onReady} />
-    ) : (
-      <>
-        <img
-          className="banner_image"
-          src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
-          alt={movie?.name}
-        />
-        <div className="banner--fadeBottom" />
-      </>
-    )}
-    <div className="banner_contents">
-      <h1 className="banner_title">{movie?.name}</h1>
-      <div className="banner_buttons">
-        <button className="banner_button">Play</button>
-        <button className="banner_button">My List</button>
+    <div
+      className="banner"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {isHovered && videoId ? (
+        <YouTube videoId={videoId} opts={opts} onReady={onReady} />
+      ) : (
+        <>
+          <img
+            className="banner_image"
+            style={{
+              backgroundSize: "cover",
+              backgroundPosition: "center center",
+
+            }}
+            src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
+            alt={movie?.name}
+          />
+          <div className="banner--fadeBottom" />
+        </>
+      )}
+      <div className="banner_contents">
+        <h1 className="banner_title">{movie?.name}</h1>
+        <div className="banner_buttons">
+          <button className="banner_button">Play</button>
+          <button className="banner_button">My List</button>
+        </div>
+        <h1 className="banner_description">{truncate(movie?.overview, 150)}</h1>
       </div>
-      <h1 className="banner_description">
-      {truncate(movie?.overview, 150)}
-      </h1>
     </div>
-  </div>
-);
+  );
 }
 
 export default Banner;
