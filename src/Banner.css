@@ -4,6 +4,7 @@
   color: white;
   object-fit: contain;
   overflow: hidden;
+  z-index: 0;
 }
 
 .banner_contents {
