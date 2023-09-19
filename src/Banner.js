@@ -9,6 +9,7 @@ function Banner() {
   const [movie, setMovie] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const [videoId, setVideoId] = useState(null);
+  const [isPlayerReady, setIsPlayerReady] = useState(false); // New state variable
 
   useEffect(() => {
     async function fetchData() {
@@ -57,8 +58,8 @@ function Banner() {
   }
 
   const opts = {
-    width: '100%',
-
+    width: '100%', // You can adjust this width as needed
+    height: '100%', // Maintain the same aspect ratio as the container (16:9)
     playerVars: {
       autoplay: 1,
       controls: 0,
@@ -66,9 +67,7 @@ function Banner() {
   };
 
   const onReady = (event) => {
-    if (event.target && event.target.playVideo) {
-      event.target.playVideo();
-    }
+    setIsPlayerReady(true); // Set the player readiness to true when ready
   };
 
   function truncate(string, n) {
@@ -76,37 +75,31 @@ function Banner() {
   }
 
   return (
-    <div
-      className="banner"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {isHovered && videoId ? (
-        <div className="banner_video">
-          <YouTube videoId={videoId} opts={opts} onReady={onReady} />
-        </div>
-      ) : (
-        <div>
-          <img
-            className="banner_image"
-            src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
-            alt={movie?.name}
-          />
-          <div className="banner_contents">
-            <h1 className="banner_title">{movie?.name}</h1>
-            <div className="banner_buttons">
-              <button className="banner_button">Play</button>
-              <button className="banner_button">My List</button>
-            </div>
-            <h1 className="banner_description">
-              {truncate(movie?.overview, 150)}
-            </h1>
-          </div>
-        </div>
-      )}
-      <div className="banner--fadeBottom" />
+    <div className="banner" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+    {isHovered && videoId ? (
+      <YouTube videoId={videoId} opts={opts} onReady={onReady} />
+    ) : (
+      <>
+        <img
+          className="banner_image"
+          src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
+          alt={movie?.name}
+        />
+        <div className="banner--fadeBottom" />
+      </>
+    )}
+    <div className="banner_contents">
+      <h1 className="banner_title">{movie?.name}</h1>
+      <div className="banner_buttons">
+        <button className="banner_button">Play</button>
+        <button className="banner_button">My List</button>
+      </div>
+      <h1 className="banner_description">
+      {truncate(movie?.overview, 150)}
+      </h1>
     </div>
-  );
+  </div>
+);
 }
 
 export default Banner;

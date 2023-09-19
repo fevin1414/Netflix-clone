@@ -24,13 +24,18 @@
 }
 
 .banner--fadeBottom {
-  height: 11.5rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3rem; /* Adjust the height as needed */
   background-image: linear-gradient(
     180deg,
     transparent,
     rgba(37, 37, 37, 0.61),
     #111
   );
+z-index:1;
 }
 
 .banner_button {
@@ -54,15 +59,6 @@
   transition: all 0.2s;
 }
 
-.banner_video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-
-  z-index: 0;
-}
-
 .banner_image {
   position: absolute;
   top: 0;
@@ -71,5 +67,4 @@
   height: 100%;
   z-index: 1;
   object-fit: cover;
-
 }
