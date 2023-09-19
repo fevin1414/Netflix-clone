@@ -9,7 +9,8 @@ function Banner() {
   const [movie, setMovie] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const [videoId, setVideoId] = useState(null);
-  const [isPlayerReady, setIsPlayerReady] = useState(false); // New state variable
+  const [isPlayerReady, setIsPlayerReady] = useState(false);
+
 
   useEffect(() => {
     async function fetchData() {
@@ -63,10 +64,10 @@ function Banner() {
   }
 
   const opts = {
-    width: "100%", // You can adjust this width as needed
-    height: "100%", // Maintain the same aspect ratio as the container (16:9)
+    width: "100%",
+    height: "100%",
     playerVars: {
-      autoplay: isHovered ? 1 : 0, // Set autoplay based on hover state
+      autoplay: isHovered ? 1 : 0,
       controls: 0,
     },
   };
@@ -86,7 +87,13 @@ function Banner() {
       onMouseLeave={() => setIsHovered(false)}
     >
       {isHovered && videoId ? (
+        <div  className="banner_video" style={{
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+
+        }}>
         <YouTube videoId={videoId} opts={opts} onReady={onReady} />
+        </div>
       ) : (
         <>
           <img
