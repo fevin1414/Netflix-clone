@@ -72,11 +72,11 @@ z-index:1;
 }
 .banner_video {
   position: absolute;
-  top: 200px;
+  top: 3px;
   left: 0;
   width: 100%;
 
   z-index: 1;
-object-fit: cover;
+object-fit: contain;
 
 }

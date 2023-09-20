@@ -65,9 +65,10 @@ function Banner() {
 
   const opts = {
     width: "100%",
-    height: "100%",
+    height:900,
+
     playerVars: {
-      autoplay: isHovered ? 1 : 0,
+      autoplay:  1 ,
       controls: 0,
     },
   };
