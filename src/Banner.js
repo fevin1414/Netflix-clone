@@ -11,24 +11,29 @@ function Banner() {
   const [videoId, setVideoId] = useState(null);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get(request.fetchNetflixOriginals);
-        const randomIndex = Math.floor(
-          Math.random() * response.data.results.length - 1
-        );
-        const randomMovie = response.data.results[randomIndex];
-        setMovie(randomMovie);
+  async function fetchDataAndVideo() {
+    try {
+      const response = await axios.get(request.fetchNetflixOriginals);
+      const randomIndex = Math.floor(
+        Math.random() * response.data.results.length - 1
+      );
+      const randomMovie = response.data.results[randomIndex];
 
-        const youtubeVideoId = await fetchYouTubeVideoId(randomMovie.name);
-        setVideoId(youtubeVideoId);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      // Fetch both movie data and video in parallel
+      const [movieData, youtubeVideoId] = await Promise.all([
+        Promise.resolve(randomMovie),
+        fetchYouTubeVideoId(randomMovie.name),
+      ]);
+
+      setMovie(movieData);
+      setVideoId(youtubeVideoId);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
+  }
 
-    fetchData();
+  useEffect(() => {
+    fetchDataAndVideo();
   }, []);
 
   useEffect(() => {
@@ -61,8 +66,15 @@ function Banner() {
       return null;
     }
   }
-  const videoAspectRatio = 16 / 9;
 
+  useEffect(() => {
+
+    if (movie && videoId) {
+      console.log("Fetched movie and videoId:", movie, videoId);
+    }
+  }, [movie, videoId]);
+
+  const videoAspectRatio = 16 / 9;
 
   const containerWidth = window.innerWidth;
   const videoWidthPercentage = 90;
@@ -71,9 +83,8 @@ function Banner() {
   const opts = {
     width: "100%",
     height: "608",
-    // height: videoHeight,
     playerVars: {
-      autoplay:  1,
+      autoplay: 1,
       controls: 0,
     },
   };
@@ -93,13 +104,7 @@ function Banner() {
       onMouseLeave={() => setIsHovered(false)}
     >
       {isHovered && videoId ? (
-        <div
-          className="banner_video"
-          style={{
-
-
-          }}
-        >
+        <div className="banner_video">
           <YouTube videoId={videoId} opts={opts} onReady={onReady} />
         </div>
       ) : (
