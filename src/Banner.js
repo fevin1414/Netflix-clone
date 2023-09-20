@@ -19,7 +19,6 @@ function Banner() {
       );
       const randomMovie = response.data.results[randomIndex];
 
-      // Fetch both movie data and video in parallel
       const [movieData, youtubeVideoId] = await Promise.all([
         Promise.resolve(randomMovie),
         fetchYouTubeVideoId(randomMovie.name),

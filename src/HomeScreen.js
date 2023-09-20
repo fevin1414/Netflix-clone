@@ -11,28 +11,28 @@ function HomeScreen() {
       <Banner />
       <Row
         title="Netflix Originals"
-        fetchurl={request.fetchNetflixOriginals}
+        fetchUrl={request.fetchNetflixOriginals}
         isLargeRow
       />
 
       <Row
         title="Trending Now"
-        fetchurl={request.fetchNetflixTrending}
+        fetchUrl={request.fetchNetflixTrending}
         isLargeRow
       />
       <Row
         title="Top Rated"
-        fetchurl={request.fetchNetflixTopRated}
+        fetchUrl={request.fetchNetflixTopRated}
         isLargeRow
       />
       <Row
         title="Action Movies"
-        fetchurl={request.fetchActionMovies}
+        fetchUrl={request.fetchActionMovies}
         isLargeRow
       />
       <Row
         title="Comedy Movies"
-        fetchurl={request.fetchComedyMovies}
+        fetchUrl={request.fetchComedyMovies}
         isLargeRow
       />
       <Row
@@ -42,12 +42,12 @@ function HomeScreen() {
       />
       <Row
         title="Rommance Movies"
-        fetchurl={request.fetchRomanceMovies}
+        fetchUrl={request.fetchRomanceMovies}
         isLargeRow
       />
       <Row
         title="Documentaries Movies"
-        fetchurl={request.fetchDocumentaries}
+        fetchUrl={request.fetchDocumentaries}
         isLargeRow
       />
     </div>
