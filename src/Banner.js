@@ -11,7 +11,6 @@ function Banner() {
   const [videoId, setVideoId] = useState(null);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
 
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -62,20 +61,26 @@ function Banner() {
       return null;
     }
   }
+  const videoAspectRatio = 16 / 9;
+
+
+  const containerWidth = window.innerWidth;
+  const videoWidthPercentage = 90;
+  const videoHeight = (containerWidth * videoAspectRatio * videoWidthPercentage) / 100;
 
   const opts = {
     width: "100%",
-    height:900,
-
+    height: "608",
+    // height: videoHeight,
     playerVars: {
-      autoplay:  1 ,
+      autoplay:  1,
       controls: 0,
     },
   };
 
   const onReady = (event) => {
     setIsPlayerReady(true);
-  }
+  };
 
   function truncate(string, n) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
@@ -88,12 +93,14 @@ function Banner() {
       onMouseLeave={() => setIsHovered(false)}
     >
       {isHovered && videoId ? (
-        <div  className="banner_video" style={{
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
+        <div
+          className="banner_video"
+          style={{
 
-        }}>
-        <YouTube videoId={videoId} opts={opts} onReady={onReady} />
+
+          }}
+        >
+          <YouTube videoId={videoId} opts={opts} onReady={onReady} />
         </div>
       ) : (
         <>
@@ -102,7 +109,6 @@ function Banner() {
             style={{
               backgroundSize: "cover",
               backgroundPosition: "center center",
-
             }}
             src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
             alt={movie?.name}

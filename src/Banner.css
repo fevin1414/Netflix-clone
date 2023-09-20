@@ -2,7 +2,7 @@
   height: 608px;
   position: relative;
   color: white;
-  object-fit: contain;
+
   overflow: hidden;
   z-index: 0;
 }
@@ -77,6 +77,6 @@ z-index:1;
   width: 100%;
 
   z-index: 1;
-object-fit: contain;
 
+  padding-bottom: 56.25%;
 }
