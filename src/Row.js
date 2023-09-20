@@ -10,7 +10,7 @@ function Row({title,fetchUrl,isLargeRow=false}) {
       try {
         const response = await axios.get(fetchUrl);
         setMovies(response.data.results);
-        console.log("Response:", response);
+        // console.log("Response:", response);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -18,13 +18,17 @@ function Row({title,fetchUrl,isLargeRow=false}) {
     fetchData();
   }, [fetchUrl]);
 
-   console.log("row:"+movies);
+  //  console.log("row:"+movies);
   return (
     <div className="row">
   <h2>{title}</h2>
+  <div className='row_posters'>
   {movies.map(movie=>(
-    <img src={`${base_url}${isLargeRow ? movie.poster_path :movie.backdrop_path}`} alt={movie.name}/>
+    <img className={`row_poster ${isLargeRow && "row_posterLarge"}`}
+    key={movie.id}
+     src={`${base_url}${isLargeRow ? movie.poster_path :movie.backdrop_path}`} alt={movie.name}/>
   ))}
+  </div>
     </div>
   )
 }

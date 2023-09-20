@@ -17,12 +17,12 @@ function HomeScreen() {
 
       <Row
         title="Trending Now"
-        fetchUrl={request.fetchNetflixTrending}
+        fetchUrl={request.fetchTrending}
         isLargeRow
       />
       <Row
         title="Top Rated"
-        fetchUrl={request.fetchNetflixTopRated}
+        fetchUrl={request.fetchTopRated}
         isLargeRow
       />
       <Row
@@ -37,7 +37,7 @@ function HomeScreen() {
       />
       <Row
         title="Horror Movies"
-        fetchurl={request.fetchHorrorMovies}
+        fetchUrl={request.fetchHorrorMovies}
         isLargeRow
       />
       <Row
