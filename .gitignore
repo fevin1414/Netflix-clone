@@ -25,5 +25,6 @@ yarn-error.log*
 # Exclude request.js
 request.js
 config.js
+.firebase.js
 # Local Netlify folder
 .netlify
