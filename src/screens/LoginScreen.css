@@ -1,0 +1,63 @@
+.loginScreen_logo{
+  position:relative;
+  left:0;
+  top:20px;
+  width:150px;
+  padding-left:20px;
+  object-fit: contain;
+}
+.loginScreen_button{
+position: fixed;
+right: 20px;
+top:20px;
+padding:10px 20px;
+font-size:1rem;
+color:white;
+background-color: #e50914;
+cursor: pointer;
+}
+
+.loginScreen{
+  background-image: linear-gradient(
+    to top,
+    rgba(0,0,0,0.8)0,
+    rgba(0,0,0,0)60%,
+    rgba(0,0,0,0.8)100%
+  );
+  position: relative;
+  height: 100%;
+  z-index: 50;
+  background: url(" https://user-images.githubusercontent.com/33485020/108069438-5ee79d80-7089-11eb-8264-08fdda7e0d11.jpg")center no-repeat;
+  background-size: cover;
+}
+.loginScreen_gradient{
+  width: 100%;
+  z-index:1;
+  height: 100vh;
+  background: rgba(0,0,0,0.4s);
+
+}
+.loginScreen_body > h1{
+font-size: 3.125rem;
+margin-bottom: 20px;
+}
+.loginScreen_body > h2{
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: 400;
+  }
+  .loginScreen_body > h3{
+    font-size: 1.3rem;
+
+    font-weight: 400;
+    }
+    .loginScreen_body {
+      z-index: 1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }

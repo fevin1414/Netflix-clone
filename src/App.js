@@ -7,19 +7,21 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoginScreen from "./screens/LoginScreen";
 
 function App() {
-  const user=null;
+  const user = null;
+
   return (
     <div className="App">
-      if(!user ?(<LoginScreen />):(
+      {user ? (
         <Router>
-        <Switch>
-          <Route exact path="/">
-            <HomeScreen />
-          </Route>
-        </Switch>
-      </Router>
-      ))
-
+          <Switch>
+            <Route exact path="/">
+              <HomeScreen />
+            </Route>
+          </Switch>
+        </Router>
+      ) : (
+        <LoginScreen />
+      )}
     </div>
   );
 }
