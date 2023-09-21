@@ -21,7 +21,7 @@ function Nav() {
   <div className="nav_contents">
   <img
       className="nav_logo"
-      src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c529.png" alt="logo"/>
+      src="https://freebiehive.com/wp-content/uploads/2021/07/Netflix-Logo-PNG-758x473.jpg" alt="logo"/>
       <img  className="nav_avatar" src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="avatar"/>
 
   </div>
